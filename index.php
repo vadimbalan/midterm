@@ -38,12 +38,24 @@ $f3->route('GET|POST /survey', function($f3)
         //var_dump($_POST);
 
         // Data is valid
-        // Store the data in the session array
-        $_SESSION['list'] = $_POST['list'];
-        $_SESSION['name'] = $_POST['name'];
+        // Validate the data
+        if (empty($_POST['name']))
+        {
+            echo "<p>Please enter a name</p>";
+        }
+        else if (in_array($_POST['list'], $list))
+        {
+            echo "<p>Please pick an item</p>";
+        }
+        else
+        {
+            // Store the data in the session array
+            $_SESSION['name'] = $_POST['name'];
+            $_SESSION['list'] = $_POST['list'];
 
-        // Redirect to profile page
-        $f3->reroute('/summary');
+            // Redirect to profile page
+            $f3->reroute('/summary');
+        }
     }
     $f3->set('list', $list);
     $view = new Template();

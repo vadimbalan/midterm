@@ -7,14 +7,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Survey</title>
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
 
     <div class="container">
         <form method="post" action="#">
             <h1>Midterm Survey</h1>
-            <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+            <div>
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ @SESSION.name }}">
+            </div>
 
             <label><strong>Check all that apply</strong></label>
             <div class="form-group">
