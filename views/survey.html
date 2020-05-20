@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Survey</title>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <form method="post" action="#">
+            <h1>Midterm Survey</h1>
+            <label for="fName">First Name</label>
+            <input type="text" class="form-control" id="fName" name="fName" placeholder="First name">
+
+            <label><strong>Check all that apply</strong></label>
+            <div class="form-group">
+                <repeat group="{{ @list }}" value="{{ @lists }}">
+                    <label><input type="checkbox" name="indoor[]" value="{{ @lists }}"> {{ ucfirst(@lists) }}</label><br>
+                </repeat>
+            </div>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+</body>
+</html>

@@ -11,6 +11,7 @@ error_reporting(E_ALL);
 
 // Require the autoload file
 require_once("vendor/autoload.php");
+require_once("model/data-layer.php");
 
 // Instantiate the F3 Base Class
 $f3 = Base::instance();
@@ -21,6 +22,30 @@ $f3->route('GET /', function()
     echo '<h1>Midterm Survey</h1>';
 
     echo '<a href="survey">Take my Midterm Survey</a>';
+});
+
+// Survey Route
+$f3->route('GET|POST /survey', function($f3)
+{
+    $list = getList();
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST')
+    {
+        // Testing
+        var_dump($_POST);
+
+        // Data is valid
+        // Store the data in the session array
+        //$_SESSION['indoor'] = $_POST['indoor'];
+        //$_SESSION['outdoor'] = $_POST['outdoor'];
+
+
+        // Redirect to profile page
+        $f3->reroute('/summary');
+    }
+    $f3->set('list', $list);
+    $view = new Template();
+    echo $view->render('views/survey.html');
 });
 
 // Run F3
