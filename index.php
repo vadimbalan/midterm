@@ -9,6 +9,9 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
+// Start a session
+session_start();
+
 // Require the autoload file
 require_once("vendor/autoload.php");
 require_once("model/data-layer.php");
@@ -32,13 +35,12 @@ $f3->route('GET|POST /survey', function($f3)
     if($_SERVER['REQUEST_METHOD'] == 'POST')
     {
         // Testing
-        var_dump($_POST);
+        //var_dump($_POST);
 
         // Data is valid
         // Store the data in the session array
-        //$_SESSION['indoor'] = $_POST['indoor'];
-        //$_SESSION['outdoor'] = $_POST['outdoor'];
-
+        $_SESSION['list'] = $_POST['list'];
+        $_SESSION['name'] = $_POST['name'];
 
         // Redirect to profile page
         $f3->reroute('/summary');
@@ -46,6 +48,13 @@ $f3->route('GET|POST /survey', function($f3)
     $f3->set('list', $list);
     $view = new Template();
     echo $view->render('views/survey.html');
+});
+
+// Default route
+$f3->route('GET /summary', function()
+{
+    $view = new Template();
+    echo $view->render('views/summary.html');
 });
 
 // Run F3
